@@ -1,0 +1,27 @@
+:root {
+  --mint-green: #73b28c;
+  --rich-green: #00a762;
+  --light-mint: #ebfef2;
+  --deep-blue: #1d1d35;
+
+  --mint-green-r: 115; /* RGB Red component */
+  --mint-green-g: 178; /* RGB Green component */
+  --mint-green-b: 140; /* RGB Blue component */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  width: 100svw;
+  height: 100svh;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: rgba(var(--mint-green-r), var(--mint-green-g), var(--mint-green-b), 0.2);
+}

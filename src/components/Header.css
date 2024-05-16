@@ -3,29 +3,36 @@
   align-items: center;
   justify-content: space-between;
   height: 100px;
-  background-color: darkgreen;
-  color: white;
 }
 
 .company {
   display: flex;
   align-items: center;
-}
-
-.logo {
-  font-family: "Belleza", sans-serif;
+  color: var(--rich-green);
+  margin-left: 20px;
 }
 
 .links {
+  width: 500px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: "Roboto", sans-serif;
+}
+
+.links a:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--rich-green);
+  color: white;
+  margin-right: 20px;
 }
 
 a {
-  margin: 0 20px;
   text-decoration: none;
-  color: white;
+  color: black;
   font-weight: 600;
 }

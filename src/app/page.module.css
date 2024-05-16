@@ -1,0 +1,35 @@
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px;
+}
+
+.hero-left {
+  flex: 1;
+  padding-left: 100px;
+  padding-right: 200px;
+}
+
+.hero-left h1 {
+  font-size: 3rem;
+  font-weight: normal;
+  margin-bottom: 20px;
+}
+
+.hero-left a:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--rich-green);
+  color: white;
+}
+
+.hero-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
