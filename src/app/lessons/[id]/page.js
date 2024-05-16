@@ -147,7 +147,29 @@ const modules = [
 
 const LessonModule = ({ params }) => {
   const [lessonModule, setLessonModule] = useState(null);
+  const [isTTSPlaying, setIsTTSPlaying] = useState(false); // State to track TTS playing status
   const id = parseInt(params.id, 10) - 1; // Adjust for array indexing and ensure id is a number
+
+  // Modified Text-to-Speech Handler to toggle play/stop
+  const handleTextToSpeechToggle = () => {
+    if (isTTSPlaying) {
+      // If TTS is currently playing, stop it
+      if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+      }
+      setIsTTSPlaying(false);
+    } else {
+      // If TTS is not playing, start it
+      if ("speechSynthesis" in window) {
+        const utterance = new SpeechSynthesisUtterance(allText);
+        speechSynthesis.speak(utterance);
+        utterance.onend = () => setIsTTSPlaying(false); // Reset TTS playing status when finished
+        setIsTTSPlaying(true);
+      } else {
+        console.error("Text-to-Speech is not supported in this browser.");
+      }
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -172,15 +194,15 @@ const LessonModule = ({ params }) => {
     return <div>Loading...</div>; // Show a loading state or similar
   }
 
-  // Function to render sections and sub-sections
+  // Function to render sections and sub-sections with added gaps
   const renderSections = (sections) => {
     return sections.map((section, index) => (
-      <div key={index}>
+      <div key={index} className="section">
         <h2>{section.heading}</h2>
         {section.paragraphs && section.paragraphs.map((paragraph, pIndex) => <p key={pIndex}>{paragraph}</p>)}
         {section.subSections &&
           section.subSections.map((subSection, ssIndex) => (
-            <div key={ssIndex}>
+            <div key={ssIndex} className="sub-section">
               <h3>{subSection.subHeading}</h3>
               {subSection.paragraphs.map((paragraph, spIndex) => (
                 <p key={spIndex}>{paragraph}</p>
@@ -191,9 +213,31 @@ const LessonModule = ({ params }) => {
     ));
   };
 
+  const allText = [
+    lessonModule.title, // Add the lessonModule title at the beginning
+    ...lessonModule.sections.map((section) =>
+      [
+        section.heading,
+        // Ensure section.paragraphs is treated as an array
+        ...(Array.isArray(section.paragraphs) ? section.paragraphs : []),
+        // Check if subSections exists, if not, use an empty array
+        ...(section.subSections
+          ? section.subSections.flatMap((sub) => [
+              sub.subHeading,
+              // Ensure sub.paragraphs is treated as an array
+              ...(Array.isArray(sub.paragraphs) ? sub.paragraphs : []),
+            ])
+          : []),
+      ].join(". ")
+    ),
+  ].join(". ");
+
   return (
     <article className={inter.className}>
-      <h1>{lessonModule.title}</h1>
+      <div className="title-container">
+        <h1>{lessonModule.title}</h1>
+        <img src="/tts.svg" alt="Title Icon" className="title-icon" onClick={handleTextToSpeechToggle} />
+      </div>
       {lessonModule.sections && renderSections(lessonModule.sections)}
     </article>
   );
