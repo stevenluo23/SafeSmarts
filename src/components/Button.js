@@ -1,27 +1,24 @@
 import React from "react";
-import Link from "next/link"; // Assuming you're using Next.js
+import Link from "next/link";
 
-const Button = ({ href, children, style, className }) => {
-  // Define default styles
-  const defaultStyle = {
+const Button = ({ href, children, className, width = "100px", height = "40px", color = "white", bgColor = "var(--rich-green)", boxShadow = "" }) => {
+  const buttonStyles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "100px",
-    height: "40px",
+    width,
+    height,
     borderRadius: "10px",
-    backgroundColor: "var(--rich-green)",
-    color: "white",
+    backgroundColor: bgColor,
+    color,
     fontSize: "0.8rem",
-    textDecoration: "none", // To remove underline from links
+    textDecoration: "none",
+    boxShadow: boxShadow,
   };
 
-  // Combine default styles with any custom styles passed via props
-  const combinedStyles = { ...defaultStyle, ...style };
-
   return (
-    <Link href={href} passHref>
-      <span style={combinedStyles} className={className}>
+    <Link href={href}>
+      <span style={buttonStyles} className={className}>
         {children}
       </span>
     </Link>

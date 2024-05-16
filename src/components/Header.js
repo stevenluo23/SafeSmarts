@@ -15,9 +15,7 @@ const Header = () => {
       <div className={`links ${inter.className}`}>
         <Link href="/about">About Us</Link>
         <Link href="/features">Features</Link>
-        <Button href="/lessons" style="margin-right: 20px">
-          Get Started
-        </Button>
+        <Button href="/lessons">Get Started</Button>
       </div>
     </header>
   );

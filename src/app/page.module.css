@@ -43,3 +43,55 @@
 .hero-right img {
   border-radius: 10px;
 }
+
+/* Identity Section */
+.identity {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 500px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.identity img {
+  height: 500px;
+  padding: 50px;
+}
+
+.identity p {
+  text-align: right;
+  font-size: 3rem;
+  width: 550px;
+  margin-bottom: 30px;
+}
+
+.button {
+  display: flex;
+  justify-content: end;
+}
+
+.educate {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 100px;
+  padding-right: 100px;
+  height: 500px;
+  background-color: #ebfef2;
+  margin-bottom: 50px;
+}
+
+.educate h1 {
+  margin-bottom: 10px;
+}
+
+.educate-left {
+  padding: 50px;
+}
+
+.cards {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
