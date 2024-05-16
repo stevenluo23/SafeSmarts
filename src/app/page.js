@@ -15,7 +15,6 @@ export default function Home() {
           </Link>
         </div>
         <div className={styles["hero-right"]}>
-          {" "}
           <img src="/hero.png" alt="Hero" />
         </div>
       </section>

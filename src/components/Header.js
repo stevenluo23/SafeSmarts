@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const Header = () => {
   return (
-    <div className="header">
+    <header className="header">
       <Link href="/" className="company">
         <img src="/SafeSmarts.png" width="50" />
         <h1>SafeSmarts</h1>
@@ -18,7 +18,7 @@ const Header = () => {
           <span>Get Started</span>
         </Link>
       </div>
-    </div>
+    </header>
   );
 };
 
