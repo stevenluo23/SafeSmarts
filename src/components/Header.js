@@ -2,6 +2,7 @@ import Link from "next/link";
 import "./Header.css";
 
 import { Inter } from "next/font/google";
+import Button from "./Button";
 const inter = Inter({ subsets: ["latin"] });
 
 const Header = () => {
@@ -14,9 +15,9 @@ const Header = () => {
       <div className={`links ${inter.className}`}>
         <Link href="/about">About Us</Link>
         <Link href="/features">Features</Link>
-        <Link href="/lessons">
-          <span>Get Started</span>
-        </Link>
+        <Button href="/lessons" style="margin-right: 20px">
+          Get Started
+        </Button>
       </div>
     </header>
   );

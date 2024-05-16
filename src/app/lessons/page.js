@@ -13,15 +13,15 @@ const Lessons = () => {
       <div className="lessons-container">
         <Link href="/lessons/1">
           <img src="/hero.png" alt="Module 1" />
-          <h1>Module 1</h1>
+          <h1>MODULE 1: Understanding Common Types of Fraud</h1>
         </Link>
         <Link href="/lessons/2">
           <img src="/hero.png" alt="Module 2" />
-          <h1>Module 2</h1>
+          <h1>MODULE 2: Protective Measures and Resources</h1>
         </Link>
         <Link href="/lessons/3">
           <img src="/hero.png" alt="Module 3" />
-          <h1>Module 3</h1>
+          <h1>MODULE 3: Reporting and Recovering from Fraud</h1>
         </Link>
       </div>
     </main>

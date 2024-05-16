@@ -29,6 +29,7 @@ header {
   background-color: var(--rich-green);
   color: white;
   margin-right: 20px;
+  font-size: 0.8rem;
 }
 
 a {
