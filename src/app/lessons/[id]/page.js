@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 import Button from "@/components/Button";
-import "./LessonModule.css";
+import "./LessonModule.module.css";
 import path from "path";
 import OpenAI from "openai";
 import styles from "./LessonModule.module.css";
 import Spinner from "@/components/Spinner";
+import { useLocalStorageState } from "@/hooks/useLocalStorage";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -156,78 +157,91 @@ const LessonModule = ({ params }) => {
 
   const [lessonModule, setLessonModule] = useState(null);
   const [isTTSPlaying, setIsTTSPlaying] = useState(false); // State to track TTS playing status
-  const [audio, setAudio] = useState(null);
+  const [audio, setAudio] = useLocalStorageState(null, "audio");
+
   const openai = new OpenAI({
     apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
-    dangerouslyAllowBrowser: true
+    dangerouslyAllowBrowser: true,
   });
   const id = parseInt(params.id, 10) - 1; // Adjust for array indexing and ensure id is a number
 
   const goToPreviousModule = () => {
-    window.location.href = `/lessons/${id}`;
     router.push(`/lessons/${id}`);
   };
 
   const goToNextModule = () => {
-    window.location.href = `/lessons/${id + 2}`;
     router.push(`/lessons/${id + 2}`);
   };
 
+  const backToLessons = () => {
+    router.push("/lessons");
+  };
+
   const handleTextToSpeechToggle = async () => {
-    if (isTTSPlaying) {
-      if (audio) {
-        audio.pause();
+    if (isTTSPlaying && audio) {
+      audio.pause();
+      setIsTTSPlaying(false);
+      return;
+    }
+
+    const cacheKey = `lesson-${id}-tts`;
+    const cachedAudioUrl = sessionStorage.getItem(cacheKey);
+
+    if (cachedAudioUrl) {
+      const audioElement = new Audio(cachedAudioUrl);
+      audioElement.play();
+      setAudio(audioElement);
+      setIsTTSPlaying(true);
+
+      audioElement.onended = () => {
         setIsTTSPlaying(false);
-      }
-    } else {
-      try {
-        const allText = [
-          lessonModule.title,
-          ...lessonModule.sections.map((section) =>
-            [
-              section.heading,
-              ...(Array.isArray(section.paragraphs) ? section.paragraphs : []),
-              ...(section.subSections
-                ? section.subSections.flatMap((sub) => [
-                    sub.subHeading,
-                    ...(Array.isArray(sub.paragraphs) ? sub.paragraphs : []),
-                  ])
-                : []),
-            ].join(". ")
-          ),
-        ].join(". ");
-                 
-        const response = await openai.completions.create({
+      };
+      return;
+    }
+
+    try {
+      const allText = [
+        lessonModule.title,
+        ...lessonModule.sections.map((section) =>
+          [
+            section.heading,
+            ...(Array.isArray(section.paragraphs) ? section.paragraphs : []),
+            ...(section.subSections ? section.subSections.flatMap((sub) => [sub.subHeading, ...(Array.isArray(sub.paragraphs) ? sub.paragraphs : [])]) : []),
+          ].join(". ")
+        ),
+      ].join(". ");
+
+      const response = await openai.completions.create({
         model: "gpt-3.5-turbo-instruct",
         prompt: `Translate this English to Spanish in shortest way possible: ${allText}`,
-        max_tokens: 3700
+        max_tokens: 3700,
       });
       const translatedText = response.choices[0].text.trim();
 
-        const mp3 = await openai.audio.speech.create({
-          model: "tts-1",
-          voice: "alloy",
-          input: translatedText,
-          language: "es",
-          format: "mp3",
-        });
-        
-        const buffer = Buffer.from(await mp3.arrayBuffer());
-        const audioElement = new Audio();
-        audioElement.src = 'data:audio/mp3;base64,' + buffer.toString('base64');
-        audioElement.play();
-        setAudio(audioElement);
-        setIsTTSPlaying(true);
-  
-        audioElement.onended = () => {
-          setIsTTSPlaying(false);
-        };
-      } catch (error) {
-        console.error('Error generating speech:', error);
-      }
+      const mp3 = await openai.audio.speech.create({
+        model: "tts-1",
+        voice: "alloy",
+        input: translatedText,
+        language: "es",
+        format: "mp3",
+      });
+
+      const buffer = Buffer.from(await mp3.arrayBuffer());
+      const audioUrl = "data:audio/mp3;base64," + buffer.toString("base64");
+      sessionStorage.setItem(cacheKey, audioUrl);
+
+      const audioElement = new Audio(audioUrl);
+      audioElement.play();
+      setAudio(audioElement);
+      setIsTTSPlaying(true);
+
+      audioElement.onended = () => {
+        setIsTTSPlaying(false);
+      };
+    } catch (error) {
+      console.error("Error generating speech:", error);
     }
-  }
-  
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -301,7 +315,10 @@ const LessonModule = ({ params }) => {
     <article className={(inter.className, styles.module)}>
       <div className={styles["title-container"]}>
         <h1 className={styles.title}>{lessonModule.title}</h1>
-        <img src="/tts.svg" alt="Title Icon" className={styles["title-icon"]} onClick={handleTextToSpeechToggle} />
+        <div className={styles["title-icon-wrapper"]} onClick={handleTextToSpeechToggle}>
+          <span>Español</span>
+          <img src="/tts.svg" alt="Title Icon" />
+        </div>
       </div>
       {lessonModule.sections && renderSections(lessonModule.sections)}
       <div className={styles["lesson-navigation-buttons"]}>
@@ -310,9 +327,13 @@ const LessonModule = ({ params }) => {
             Previous Module
           </Button>
         )}
-        {id < modules.length - 1 && (
+        {id < modules.length - 1 ? (
           <Button onClick={goToNextModule} className={inter.className}>
             Next Module
+          </Button>
+        ) : (
+          <Button onClick={backToLessons} className={inter.className} width="150px" bgColor="#3498db">
+            Back to Lessons
           </Button>
         )}
       </div>

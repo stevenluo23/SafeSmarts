@@ -69,12 +69,12 @@
 
 .get-started {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
 .enroll {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 
 /* Educate Section */

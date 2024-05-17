@@ -14,11 +14,23 @@
   align-items: center;
 }
 
-.title-icon {
-  margin-left: 10px;
+.title-icon-wrapper {
+  display: flex;
+  gap: 10px;
+  margin-left: 20px;
   margin-bottom: 20px;
   cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.title-icon-wrapper img {
   width: 20px;
+}
+
+.title-icon-wrapper:hover {
+  background-color: #f0f0f0; /* Light grey background on hover */
+  border-radius: 5px; /* Slight rounding of corners */
+  transform: scale(1.1); /* Slightly enlarge the image on hover */
 }
 
 .heading {
@@ -59,7 +71,6 @@
   .title-icon {
     margin-left: 0;
     margin-bottom: 10px;
-    width: 15px; /* Smaller icon for smaller screens */
   }
 
   .heading,
