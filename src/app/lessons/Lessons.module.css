@@ -10,11 +10,11 @@
 }
 
 .lessons-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr; /* Ensures only one column */
+  gap: 25px; /* Maintains gap between grid items */
+  justify-content: center; /* Centers the grid items */
   background-color: lightgrey;
-  gap: 25px;
   margin-left: 400px;
   margin-right: 400px;
   margin-top: 50px;
@@ -23,27 +23,8 @@
   border-width: 1px;
   border-color: grey;
   border-radius: 20px;
-  max-height: calc(100vh - 385px);
-  overflow-y: auto;
-
-  /* Custom scrollbar styles */
-  scrollbar-width: thin; /* For Firefox */
-  scrollbar-color: darkgrey lightgrey; /* For Firefox: thumb and track color */
-
-  /* For Chrome, Edge, and Safari */
-  &::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
-  }
-
-  &::-webkit-scrollbar-track {
-    background: lightgrey; /* Color of the track */
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: darkgrey; /* Color of the scrollbar thumb */
-    border-radius: 20px; /* Rounded corners on the scrollbar thumb */
-    border: 3px solid lightgrey; /* Creates padding around the scrollbar thumb */
-  }
+  margin-bottom: 100px;
+  overflow-x: auto;
 }
 
 .lessons-container a {
@@ -55,7 +36,7 @@
 }
 
 .lessons-container a img {
-  min-width: 50%;
+  width: 500px;
   height: 100%;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -66,8 +47,33 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 20px;
+  max-height: 181px;
 }
 
 .module-description h2 {
   margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .lessons h1 {
+    margin: 0; /* Removes margin */
+    text-align: center; /* Centers the title */
+  }
+
+  .lessons-container {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .lessons-container a {
+    flex-direction: column; /* Changes grid to column */
+    max-height: 500px; /* Adjusted for responsiveness */
+    overflow-y: auto;
+  }
+
+  .lessons-container a img {
+    width: 100%; /* Adjusted for responsiveness */
+    height: 100%; /* Adjusted for responsiveness */
+    border-radius: 10px 10px 0 0; /* Adjusted for responsiveness */
+  }
 }
