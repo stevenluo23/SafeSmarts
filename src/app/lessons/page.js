@@ -12,7 +12,7 @@ const Lessons = () => {
       </div>
       <div className={styles["lessons-container"]}>
         <Link href="/lessons/1">
-          <img src="/hero.png" alt="Module 1" />
+          <img src="/passport.png" alt="Module 1" />
           <div className={styles["module-description"]}>
             <h2>Module 1</h2>
             <h1>Understanding Common Types of Fraud</h1>
@@ -20,7 +20,7 @@ const Lessons = () => {
           </div>
         </Link>
         <Link href="/lessons/2">
-          <img src="/hero.png" alt="Module 2" />
+          <img src="/protect.png" alt="Module 2" />
           <div className={styles["module-description"]}>
             <h2>Module 2</h2>
             <h1>Protective Measures and Resources</h1>
@@ -28,7 +28,7 @@ const Lessons = () => {
           </div>
         </Link>
         <Link href="/lessons/3">
-          <img src="/hero.png" alt="Module 3" />
+          <img src="/recover.jpg" alt="Module 3" />
           <div className={styles["module-description"]}>
             <h2>Module 3</h2>
             <h1>Reporting and Recovering from Fraud</h1>

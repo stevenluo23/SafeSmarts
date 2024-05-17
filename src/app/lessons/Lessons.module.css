@@ -36,7 +36,7 @@
 }
 
 .lessons-container a img {
-  width: 500px;
+  min-width: 500px;
   height: 100%;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;

@@ -185,7 +185,7 @@ const LessonModule = ({ params }) => {
     }
 
     const cacheKey = `lesson-${id}-tts`;
-    const cachedAudioUrl = sessionStorage.getItem(cacheKey);
+    const cachedAudioUrl = localStorage.getItem(cacheKey);
 
     if (cachedAudioUrl) {
       const audioElement = new Audio(cachedAudioUrl);
@@ -228,7 +228,7 @@ const LessonModule = ({ params }) => {
 
       const buffer = Buffer.from(await mp3.arrayBuffer());
       const audioUrl = "data:audio/mp3;base64," + buffer.toString("base64");
-      sessionStorage.setItem(cacheKey, audioUrl);
+      localStorage.setItem(cacheKey, audioUrl);
 
       const audioElement = new Audio(audioUrl);
       audioElement.play();
