@@ -1,0 +1,30 @@
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 150px);
+}
+
+.spinner {
+  width: 200px; /* Equivalent to Tailwind's w-5 */
+  height: 200px; /* Equivalent to Tailwind's h-5 */
+  color: black; /* Equivalent to Tailwind's text-black */
+  animation: spin 1s linear infinite;
+}
+
+.circle {
+  opacity: 0.25; /* Equivalent to Tailwind's opacity-25 */
+}
+
+.path {
+  opacity: 0.75; /* Equivalent to Tailwind's opacity-75 */
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

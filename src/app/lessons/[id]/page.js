@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 import Button from "@/components/Button";
 import styles from "./LessonModule.module.css";
+import Spinner from "@/components/Spinner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -203,7 +204,7 @@ const LessonModule = ({ params }) => {
   }, [id]); // Dependency array, ensures useEffect runs once or when `id` changes
 
   if (!lessonModule) {
-    return <div>Loading...</div>; // Show a loading state or similar
+    return <Spinner />; // Show a loading state or similar
   }
 
   // Function to render sections and sub-sections with added gaps

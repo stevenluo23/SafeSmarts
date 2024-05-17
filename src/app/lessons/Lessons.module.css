@@ -60,3 +60,14 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
+
+.module-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.module-description h2 {
+  margin-bottom: 10px;
+}
