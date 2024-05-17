@@ -244,22 +244,7 @@ const LessonModule = ({ params }) => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`https://localhost:8080/lessons/${params.id}`);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setLessonModule(data);
-      } catch (error) {
-        console.error("Failed to fetch lesson module:", error);
-        // Use dummy data as fallback
-        setLessonModule(modules[id]);
-      }
-    };
-
-    fetchData();
+    setLessonModule(modules[id]);
   }, [id]); // Dependency array, ensures useEffect runs once or when `id` changes
 
   if (!lessonModule) {
