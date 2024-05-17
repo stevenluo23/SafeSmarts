@@ -26,6 +26,12 @@ body {
   background-color: rgba(var(--mint-green-r), var(--mint-green-g), var(--mint-green-b), 0.2);
 }
 
+a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+}
+
 a:hover {
   text-decoration: underline; /* Underline link on hover */
 }

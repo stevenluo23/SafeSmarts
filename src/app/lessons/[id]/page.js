@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 import Button from "@/components/Button";
-import "./LessonModule.css";
+import styles from "./LessonModule.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -147,19 +148,18 @@ const modules = [
 ];
 
 const LessonModule = ({ params }) => {
+  const router = useRouter();
+
   const [lessonModule, setLessonModule] = useState(null);
   const [isTTSPlaying, setIsTTSPlaying] = useState(false); // State to track TTS playing status
   const id = parseInt(params.id, 10) - 1; // Adjust for array indexing and ensure id is a number
 
-  // Navigation handlers
   const goToPreviousModule = () => {
-    // Navigate to previous module
-    window.location.href = `/lessons/${id}`;
+    router.push(`/lessons/${id}`);
   };
 
   const goToNextModule = () => {
-    // Navigate to next module
-    window.location.href = `/lessons/${id + 2}`;
+    router.push(`/lessons/${id + 2}`);
   };
 
   // Modified Text-to-Speech Handler to toggle play/stop
@@ -209,15 +209,22 @@ const LessonModule = ({ params }) => {
   // Function to render sections and sub-sections with added gaps
   const renderSections = (sections) => {
     return sections.map((section, index) => (
-      <div key={index} className="section">
-        <h2>{section.heading}</h2>
-        {section.paragraphs && section.paragraphs.map((paragraph, pIndex) => <p key={pIndex}>{paragraph}</p>)}
+      <div key={index} className={styles.section}>
+        <h2 className={styles.heading}>{section.heading}</h2>
+        {section.paragraphs &&
+          section.paragraphs.map((paragraph, pIndex) => (
+            <p key={pIndex} className={styles.paragraph}>
+              {paragraph}
+            </p>
+          ))}
         {section.subSections &&
           section.subSections.map((subSection, ssIndex) => (
-            <div key={ssIndex} className="sub-section">
-              <h3>{subSection.subHeading}</h3>
+            <div key={ssIndex} className={"sub-section"}>
+              <h3 className={styles.heading}>{subSection.subHeading}</h3>
               {subSection.paragraphs.map((paragraph, spIndex) => (
-                <p key={spIndex}>{paragraph}</p>
+                <p key={spIndex} className={styles.paragraph}>
+                  {paragraph}
+                </p>
               ))}
             </div>
           ))}
@@ -245,13 +252,13 @@ const LessonModule = ({ params }) => {
   ].join(". ");
 
   return (
-    <article className={inter.className}>
-      <div className="title-container">
-        <h1>{lessonModule.title}</h1>
-        <img src="/tts.svg" alt="Title Icon" className="title-icon" onClick={handleTextToSpeechToggle} />
+    <article className={(inter.className, styles.module)}>
+      <div className={styles["title-container"]}>
+        <h1 className={styles.title}>{lessonModule.title}</h1>
+        <img src="/tts.svg" alt="Title Icon" className={styles["title-icon"]} onClick={handleTextToSpeechToggle} />
       </div>
       {lessonModule.sections && renderSections(lessonModule.sections)}
-      <div className="lesson-navigation-buttons">
+      <div className={styles["lesson-navigation-buttons"]}>
         {id > 0 && (
           <Button onClick={goToPreviousModule} className={inter.className}>
             Previous Module

@@ -1,3 +1,4 @@
+/* Hero Styles */
 .hero {
   display: flex;
   justify-content: space-between;
@@ -66,11 +67,17 @@
   margin-bottom: 30px;
 }
 
-.button {
+.get-started {
+  display: flex;
+  justify-content: start;
+}
+
+.enroll {
   display: flex;
   justify-content: end;
 }
 
+/* Educate Section */
 .educate {
   display: flex;
   justify-content: space-around;
@@ -94,4 +101,135 @@
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    flex-direction: column;
+    padding: 50px;
+    min-height: 600px;
+  }
+
+  .hero-left,
+  .hero-right {
+    flex: none;
+    padding: 0;
+    text-align: center;
+  }
+
+  .hero-left {
+    margin-bottom: 20px;
+  }
+
+  .hero-left h1 {
+    font-size: 2.5rem;
+  }
+
+  .identity,
+  .educate {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    height: auto;
+  }
+
+  .identity img,
+  .educate-left {
+    margin: 20px;
+  }
+
+  .identity img,
+  .educate img {
+    width: 350px;
+    height: 350px;
+  }
+
+  .identity p,
+  .educate h1 {
+    text-align: center;
+    width: 100%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .enroll,
+  .get-started {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-left h1 {
+    font-size: 2rem;
+  }
+
+  .hero-left a:last-child {
+    width: 80px;
+    height: 35px;
+    font-size: 0.7rem;
+  }
+
+  .identity p,
+  .educate h1 {
+    font-size: 2.2rem;
+  }
+
+  .identity,
+  .educate {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .enroll,
+  .get-started {
+    justify-content: center;
+  }
+
+  .hero-right img {
+    width: 500px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 20px;
+    min-height: 300px;
+  }
+
+  .hero-right img {
+    width: 260px;
+    height: 150px;
+  }
+
+  .hero-left h1 {
+    font-size: 1.5rem;
+  }
+
+  .identity,
+  .educate {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .identity img,
+  .educate img {
+    padding: 0;
+    width: 200px;
+    height: 200px;
+  }
+
+  .identity p,
+  .educate h1 {
+    font-size: 1.5rem;
+  }
+
+  .enroll,
+  .get-started {
+    justify-content: center;
+  }
 }

@@ -11,9 +11,11 @@ export default function Home() {
       <main className={styles.hero}>
         <div className={styles["hero-left"]}>
           <h1>Empowering immigrants through fraud awareness.</h1>
-          <Button href="/lessons">
-            <span className={inter.className}>Get Started</span>
-          </Button>
+          <div className={styles["get-started"]}>
+            <Button href="/lessons" className={inter.className}>
+              Get Started
+            </Button>
+          </div>
         </div>
         <div className={styles["hero-right"]}>
           <img src="/hero.png" alt="Hero" />
@@ -23,7 +25,7 @@ export default function Home() {
         <img src="/security.png"></img>
         <div>
           <p>Enroll in identity theft protection services to monitor your personal information and receive alerts about suspicious activities</p>
-          <div className={styles.button}>
+          <div className={styles.enroll}>
             <Button href="/" className={inter.className}>
               Enroll Now
             </Button>

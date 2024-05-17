@@ -1,4 +1,4 @@
-header {
+.header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,8 +32,28 @@ header {
   font-size: 0.8rem;
 }
 
-a {
-  text-decoration: none;
-  color: black;
-  font-weight: 600;
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .company {
+    margin: 0 0 20px 0;
+  }
+
+  .links {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .links a {
+    margin-bottom: 10px;
+  }
+
+  .links a:last-child {
+    margin-right: 0;
+  }
 }

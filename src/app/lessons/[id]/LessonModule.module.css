@@ -1,5 +1,11 @@
-article {
+.module {
   margin: 100px;
+  margin-top: 20px;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 20px;
 }
 
 .title-container {
@@ -9,15 +15,18 @@ article {
 
 .title-icon {
   margin-left: 10px;
+  margin-bottom: 20px;
   cursor: pointer;
+  width: 20px;
 }
 
-h2,
-h3 {
+.heading {
+  /* New class for h2 and h3 */
   margin-bottom: 20px; /* Adjust the space below headings */
 }
 
-p {
+.paragraph {
+  /* New class for paragraphs */
   margin-bottom: 15px; /* Adjust the space below paragraphs */
 }
 
