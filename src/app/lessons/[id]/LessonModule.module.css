@@ -1,6 +1,7 @@
 .module {
   margin: 100px;
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .title {
@@ -21,12 +22,10 @@
 }
 
 .heading {
-  /* New class for h2 and h3 */
   margin-bottom: 20px; /* Adjust the space below headings */
 }
 
 .paragraph {
-  /* New class for paragraphs */
   margin-bottom: 15px; /* Adjust the space below paragraphs */
 }
 
@@ -38,4 +37,39 @@
 .lesson-navigation-buttons {
   display: flex;
   justify-content: space-between;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .module {
+    margin: 50px;
+    margin-top: 10px;
+  }
+
+  .title {
+    font-size: 24px; /* Smaller font size for smaller screens */
+    margin-bottom: 15px;
+  }
+
+  .title-container {
+    flex-direction: column; /* Stack title and icon vertically on smaller screens */
+    align-items: flex-start;
+  }
+
+  .title-icon {
+    margin-left: 0;
+    margin-bottom: 10px;
+    width: 15px; /* Smaller icon for smaller screens */
+  }
+
+  .heading,
+  .paragraph,
+  .section,
+  .sub-section {
+    margin-bottom: 10px; /* Less space below elements on smaller screens */
+  }
+
+  .lesson-navigation-buttons {
+    gap: 10px; /* Add space between stacked buttons */
+  }
 }
