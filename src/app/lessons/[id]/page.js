@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Inter } from "next/font/google";
+import Button from "@/components/Button";
 import "./LessonModule.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -150,6 +151,17 @@ const LessonModule = ({ params }) => {
   const [isTTSPlaying, setIsTTSPlaying] = useState(false); // State to track TTS playing status
   const id = parseInt(params.id, 10) - 1; // Adjust for array indexing and ensure id is a number
 
+  // Navigation handlers
+  const goToPreviousModule = () => {
+    // Navigate to previous module
+    window.location.href = `/lessons/${id}`;
+  };
+
+  const goToNextModule = () => {
+    // Navigate to next module
+    window.location.href = `/lessons/${id + 2}`;
+  };
+
   // Modified Text-to-Speech Handler to toggle play/stop
   const handleTextToSpeechToggle = () => {
     if (isTTSPlaying) {
@@ -239,6 +251,18 @@ const LessonModule = ({ params }) => {
         <img src="/tts.svg" alt="Title Icon" className="title-icon" onClick={handleTextToSpeechToggle} />
       </div>
       {lessonModule.sections && renderSections(lessonModule.sections)}
+      <div className="lesson-navigation-buttons">
+        {id > 0 && (
+          <Button onClick={goToPreviousModule} className={inter.className}>
+            Previous Module
+          </Button>
+        )}
+        {id < modules.length - 1 && (
+          <Button onClick={goToNextModule} className={inter.className}>
+            Next Module
+          </Button>
+        )}
+      </div>
     </article>
   );
 };

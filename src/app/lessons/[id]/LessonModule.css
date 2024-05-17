@@ -25,3 +25,8 @@ p {
 .sub-section {
   margin-bottom: 30px; /* Adjust the space between sections and sub-sections */
 }
+
+.lesson-navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}

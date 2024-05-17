@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
-const Button = ({ href, children, className, width = "100px", height = "40px", color = "white", bgColor = "var(--rich-green)", boxShadow = "" }) => {
+const Button = ({ href, children, className, width = "100px", height = "40px", color = "white", bgColor = "var(--rich-green)", boxShadow = "", onClick = () => {} }) => {
   const buttonStyles = {
     display: "flex",
     alignItems: "center",
@@ -14,15 +16,25 @@ const Button = ({ href, children, className, width = "100px", height = "40px", c
     fontSize: "0.8rem",
     textDecoration: "none",
     boxShadow: boxShadow,
+    cursor: "pointer",
+    border: "none",
   };
 
-  return (
-    <Link href={href}>
-      <span style={buttonStyles} className={className}>
+  if (href) {
+    return (
+      <Link href={href}>
+        <button style={buttonStyles} className={className} onClick={onClick}>
+          {children}
+        </button>
+      </Link>
+    );
+  } else {
+    return (
+      <button style={buttonStyles} className={className} onClick={onClick}>
         {children}
-      </span>
-    </Link>
-  );
+      </button>
+    );
+  }
 };
 
 export default Button;
