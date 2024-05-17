@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Inter } from "next/font/google";
 import Button from "@/components/Button";
+import "./LessonModule.css";
+import path from "path";
+import OpenAI from "openai";
 import styles from "./LessonModule.module.css";
 import Spinner from "@/components/Spinner";
 
@@ -153,36 +156,78 @@ const LessonModule = ({ params }) => {
 
   const [lessonModule, setLessonModule] = useState(null);
   const [isTTSPlaying, setIsTTSPlaying] = useState(false); // State to track TTS playing status
+  const [audio, setAudio] = useState(null);
+  const openai = new OpenAI({
+    apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
+    dangerouslyAllowBrowser: true
+  });
   const id = parseInt(params.id, 10) - 1; // Adjust for array indexing and ensure id is a number
 
   const goToPreviousModule = () => {
+    window.location.href = `/lessons/${id}`;
     router.push(`/lessons/${id}`);
   };
 
   const goToNextModule = () => {
+    window.location.href = `/lessons/${id + 2}`;
     router.push(`/lessons/${id + 2}`);
   };
 
-  // Modified Text-to-Speech Handler to toggle play/stop
-  const handleTextToSpeechToggle = () => {
+  const handleTextToSpeechToggle = async () => {
     if (isTTSPlaying) {
-      // If TTS is currently playing, stop it
-      if ("speechSynthesis" in window) {
-        speechSynthesis.cancel();
+      if (audio) {
+        audio.pause();
+        setIsTTSPlaying(false);
       }
-      setIsTTSPlaying(false);
     } else {
-      // If TTS is not playing, start it
-      if ("speechSynthesis" in window) {
-        const utterance = new SpeechSynthesisUtterance(allText);
-        speechSynthesis.speak(utterance);
-        utterance.onend = () => setIsTTSPlaying(false); // Reset TTS playing status when finished
+      try {
+        const allText = [
+          lessonModule.title,
+          ...lessonModule.sections.map((section) =>
+            [
+              section.heading,
+              ...(Array.isArray(section.paragraphs) ? section.paragraphs : []),
+              ...(section.subSections
+                ? section.subSections.flatMap((sub) => [
+                    sub.subHeading,
+                    ...(Array.isArray(sub.paragraphs) ? sub.paragraphs : []),
+                  ])
+                : []),
+            ].join(". ")
+          ),
+        ].join(". ");
+                 
+        const response = await openai.completions.create({
+        model: "gpt-3.5-turbo-instruct",
+        prompt: `Translate this English to Spanish in shortest way possible: ${allText}`,
+        max_tokens: 3700
+      });
+      const translatedText = response.choices[0].text.trim();
+
+        const mp3 = await openai.audio.speech.create({
+          model: "tts-1",
+          voice: "alloy",
+          input: translatedText,
+          language: "es",
+          format: "mp3",
+        });
+        
+        const buffer = Buffer.from(await mp3.arrayBuffer());
+        const audioElement = new Audio();
+        audioElement.src = 'data:audio/mp3;base64,' + buffer.toString('base64');
+        audioElement.play();
+        setAudio(audioElement);
         setIsTTSPlaying(true);
-      } else {
-        console.error("Text-to-Speech is not supported in this browser.");
+  
+        audioElement.onended = () => {
+          setIsTTSPlaying(false);
+        };
+      } catch (error) {
+        console.error('Error generating speech:', error);
       }
     }
-  };
+  }
+  
 
   useEffect(() => {
     const fetchData = async () => {
