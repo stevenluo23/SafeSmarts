@@ -8,7 +8,7 @@ const Header = () => {
   return (
     <header className="header">
       <Link href="/" className="company">
-        <img src="/SafeSmarts.png" width="50" />
+        <img src="/SafeSmarts.png" width="50" alt="SafeSmarts logo" />
         <h1>SafeSmarts</h1>
       </Link>
       <div className={`links ${inter.className}`}>

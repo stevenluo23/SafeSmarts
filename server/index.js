@@ -1,29 +1,24 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const PORT = 8080;
-const cors = require('cors');
+const cors = require("cors");
 
 app.use(cors());
+// Parse requests as JSON
 app.use(express.json());
 
-
-// about our API
+// About our API
 app.get("/about", (req, res) => {
-	res.send("This is an API service for CRUD actions on movies resources.");
+  res.send("This is an API service for CRUD actions on lesson modules. Use /lessons/:id to get a specific lesson.");
 });
 
-// the {name} value is dynamic based on the URL provided.
-app.get("/about/:name", (req, res) => {
-	const name = req.params.name;
-	res.send(
-		"This is an API service for CRUD actions on a movies resource...for you " +
-			name
-	);
-});
-
-const movieRouter = require('./routes/movies_routes');
-app.use('/movies', movieRouter);
+const lessonsRouter = require("./routes/lessons_routes");
+app.use("/lessons", lessonsRouter);
+const ttsRouter = require("./routes/tts_routes");
+app.use("/tts", ttsRouter);
 
 app.listen(PORT, () => {
-	console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server is running on port ${PORT}.`);
 });

@@ -22,7 +22,7 @@ export default function Home() {
         </div>
       </main>
       <section className={styles.identity}>
-        <img src="/security.png"></img>
+        <img src="/security.png" alt="Security"></img>
         <div>
           <p>Enroll in identity theft protection services to monitor your personal information and receive alerts about suspicious activities</p>
           <div className={styles.enroll}>
@@ -66,7 +66,7 @@ export default function Home() {
             </Card>
           </div>
         </div>
-        <img src="/educate.png"></img>
+        <img src="/educate.png" alt="Educate"></img>
       </section>
     </>
   );
