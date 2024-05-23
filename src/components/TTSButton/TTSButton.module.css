@@ -1,4 +1,4 @@
-.title-icon-wrapper {
+.ttsWrapper {
   display: flex;
   gap: 10px;
   margin-left: 20px;
@@ -7,11 +7,11 @@
   font-size: 1.2rem;
 }
 
-.title-icon-wrapper img {
+.ttsWrapper img {
   width: 20px;
 }
 
-.title-icon-wrapper:hover {
+.ttsWrapper:hover {
   background-color: #f0f0f0; /* Light grey background on hover */
   border-radius: 5px; /* Slight rounding of corners */
   transform: scale(1.1); /* Slightly enlarge the image on hover */

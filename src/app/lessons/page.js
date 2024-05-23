@@ -10,10 +10,10 @@ const Lessons = () => {
       <div className={styles.lessons}>
         <h1>Lessons</h1>
       </div>
-      <div className={styles["lessons-container"]}>
+      <div className={styles.lessonsContainer}>
         <Link href="/lessons/1">
           <img src="/passport.png" alt="Lesson 1" />
-          <div className={styles["module-description"]}>
+          <div className={styles.moduleDescription}>
             <h2>Lesson Module 1</h2>
             <h1>Understanding Common Types of Fraud</h1>
             <p>Learn about the most common types of fraud and how to protect yourself from falling victim to them.</p>
@@ -21,7 +21,7 @@ const Lessons = () => {
         </Link>
         <Link href="/lessons/2">
           <img src="/protect.png" alt="Lesson 2" />
-          <div className={styles["module-description"]}>
+          <div className={styles.moduleDescription}>
             <h2>Lesson Module 2</h2>
             <h1>Protective Measures and Resources</h1>
             <p>Discover the tools and resources available to safeguard your personal information and prevent fraud.</p>
@@ -29,7 +29,7 @@ const Lessons = () => {
         </Link>
         <Link href="/lessons/3">
           <img src="/recover.jpg" alt="Lesson 3" />
-          <div className={styles["module-description"]}>
+          <div className={styles.moduleDescription}>
             <h2>Lesson Module 3</h2>
             <h1>Reporting and Recovering from Fraud</h1>
             <p>Learn how to report fraudulent activities and take steps to recover from the impact of fraud.</p>

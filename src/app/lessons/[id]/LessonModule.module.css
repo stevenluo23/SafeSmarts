@@ -9,7 +9,7 @@
   margin-bottom: 20px;
 }
 
-.title-container {
+.titleContainer {
   display: flex;
   align-items: center;
 }
@@ -23,7 +23,7 @@
 }
 
 .section,
-.sub-section {
+.subSection {
   margin-bottom: 30px; /* Adjust the space between sections and sub-sections */
 }
 
@@ -39,20 +39,15 @@
     margin-bottom: 15px;
   }
 
-  .title-container {
+  .titleContainer {
     flex-direction: column; /* Stack title and icon vertically on smaller screens */
     align-items: flex-start;
-  }
-
-  .title-icon {
-    margin-left: 0;
-    margin-bottom: 10px;
   }
 
   .heading,
   .paragraph,
   .section,
-  .sub-section {
+  .subSection {
     margin-bottom: 10px; /* Less space below elements on smaller screens */
   }
 }

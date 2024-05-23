@@ -2,7 +2,7 @@
 import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
-import "./LessonNavButtons.css";
+import styles from "./LessonNavButtons.module.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,7 +10,7 @@ const LessonNavButtons = ({ lessonId, totalLessons }) => {
   const router = useRouter();
 
   return (
-    <div className="lesson-navigation-buttons">
+    <div className={styles.lessonNavButtons}>
       {lessonId > 1 && (
         <Button onClick={() => router.push(`/lessons/${lessonId - 1}`)} className={inter.className}>
           Previous Module

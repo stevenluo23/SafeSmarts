@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import "./TTSButton.css";
+import styles from "./TTSButton.module.css";
 
 const TTSButton = ({ lessonModule, lessonId }) => {
   const [isTTSPlaying, setIsTTSPlaying] = useState(false);
@@ -73,7 +73,7 @@ const TTSButton = ({ lessonModule, lessonId }) => {
   };
 
   return (
-    <div className="title-icon-wrapper" onClick={handleTextToSpeechToggle}>
+    <div className={styles.ttsWrapper} onClick={handleTextToSpeechToggle}>
       <span>Español</span>
       <img src="/tts.svg" alt="Title Icon" />
     </div>
