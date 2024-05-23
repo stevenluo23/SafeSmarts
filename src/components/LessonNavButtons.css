@@ -1,0 +1,10 @@
+.lesson-navigation-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .lesson-navigation-buttons {
+    gap: 10px; /* Add space between stacked buttons */
+  }
+}

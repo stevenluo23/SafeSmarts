@@ -14,25 +14,6 @@
   align-items: center;
 }
 
-.title-icon-wrapper {
-  display: flex;
-  gap: 10px;
-  margin-left: 20px;
-  margin-bottom: 20px;
-  cursor: pointer;
-  font-size: 1.2rem;
-}
-
-.title-icon-wrapper img {
-  width: 20px;
-}
-
-.title-icon-wrapper:hover {
-  background-color: #f0f0f0; /* Light grey background on hover */
-  border-radius: 5px; /* Slight rounding of corners */
-  transform: scale(1.1); /* Slightly enlarge the image on hover */
-}
-
 .heading {
   margin-bottom: 20px; /* Adjust the space below headings */
 }
@@ -44,11 +25,6 @@
 .section,
 .sub-section {
   margin-bottom: 30px; /* Adjust the space between sections and sub-sections */
-}
-
-.lesson-navigation-buttons {
-  display: flex;
-  justify-content: space-between;
 }
 
 /* Responsive adjustments */
@@ -78,9 +54,5 @@
   .section,
   .sub-section {
     margin-bottom: 10px; /* Less space below elements on smaller screens */
-  }
-
-  .lesson-navigation-buttons {
-    gap: 10px; /* Add space between stacked buttons */
   }
 }
